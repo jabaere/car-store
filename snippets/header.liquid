@@ -1,0 +1,23 @@
+<header>
+  {% for link in linklists.main-menu.links -%}
+    {% if link.title == 'Home' %}
+      {% assign letters_array = link.title | split: '' %}
+      {% assign first_word = link.title | truncate: 3, '' %}
+      <div class="container w-4 px-4 py-4 flex items-baseline">
+        <p class="bg-white-400 px-4 py-4">{{ first_word | link_to: link.url }}</p>
+        <div class="w-100 h-20 bg-pink home">
+          <p class="bg-green-500 hover:bg-purple-400  px-2 py-4 -mx-4 text-white text-2xl home-p home">
+            {{ letters_array.last | link_to: link.url }}
+          </p>
+        </div>
+
+      </div>
+    {% endif %}
+  {%- endfor %}
+</header>
+
+{% comment %} 
+<div class="container mx-auto">
+<div class="px-4 py-4">{{ link.title | link_to: link.url }}</div>
+</div>
+{% endcomment %}

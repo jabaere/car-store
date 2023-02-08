@@ -1,0 +1,10 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.home{
+    @apply transition ease-in-out delay-150 hover:scale-110 duration-300 hover:transform rotate-180;
+}
+
+

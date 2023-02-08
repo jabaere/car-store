@@ -1,0 +1,56 @@
+{{ 'styles.css' | asset_url | stylesheet_tag }}
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>car-store</title>
+    <meta charset="utf-8">
+    <meta name="description" content="&lt;model-viewer&gt; template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- OPTIONAL: The :focus-visible polyfill removes the focus ring for some input types -->
+
+    <script src="https://unpkg.com/focus-visible@5.0.2/dist/focus-visible.js" defer></script>
+    {% comment %}<script src="{{ 'focus-visible.js' | asset_url }}" defer="defer"></script>}{% endcomment %}
+  </head>
+  <body>
+    <!-- <model-viewer> HTML element -->
+    <model-viewer
+      src="{{'scene.gltf' | asset_url}}"
+      ar
+      ar-modes="webxr scene-viewer quick-look"
+      camera-controls
+      poster="{{'ezgif.com-gif-to-webp-1.webp' | asset_url}}"
+      shadow-intensity="1"
+      autoplay
+      auto-rotate>
+      <button
+        class="Hotspot"
+        slot="hotspot-3"
+        data-surface="0 0 1782 1784 1783 0.348 0.396 0.257"
+        data-visibility-attribute="visible">
+        {% for link in linklists.main-menu.links -%}
+          {% if link.title == 'Catalog' %}
+            <div class="HotspotAnnotation">
+              {{ link.title | link_to: link.url }}
+            </div>
+           {%endif%}
+          {%- endfor %}
+
+        </button>
+        <div class="progress-bar hide" slot="progress-bar">
+          <div class="update-bar"></div>
+        </div>
+        <button slot="ar-button" id="ar-button">
+          View in your space
+        </button>
+        <div id="ar-prompt">
+          <img src="{{'ar_hand_prompt.png' | asset_img_url: '500x'}}">
+        </div>
+      </model-viewer>
+      <script src="{{ 'script.js' | asset_url }}"></script>
+      {% comment %} <script src="{{ 'min.js' | asset_url }}" type="module"></script> {% endcomment %}
+      <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    </body>
+  </body>
+</html>
